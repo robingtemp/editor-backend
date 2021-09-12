@@ -52,4 +52,4 @@ mongoose.connect(process.env.DB_CONNECTION, () =>
 console.log("Connected to db"))
 
 // Start up server
-app.listen(port, () => console.log(`Example API listening on port ${port}!`));
+app.listen(port, () => console.log(`Listening on port ${port}!`));
