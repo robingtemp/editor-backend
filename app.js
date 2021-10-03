@@ -47,9 +47,19 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Connect to DB
-mongoose.connect(process.env.DB_CONNECTION, () => 
-console.log("Connected to db"))
+if (process.env.NODE_ENV !== 'test') {
+    // Connect to DB
+    mongoose.connect(process.env.DB_CONNECTION);
+
+    // Start up server
+    app.listen(port, () => console.log(`Listening on port ${port}!`));
+} else {
+    // Connect to TEST DB
+    mongoose.connect(process.env.DB_TEST_CONNECTION);
+}
 
 // Start up server
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+const server = app.listen(port, () => console.log(`Listening on port ${port}!`));
+
+
+module.exports = server
